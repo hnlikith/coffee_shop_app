@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:coffee_shop_app/core/theme/app_theme.dart';
 import 'package:coffee_shop_app/controllers/coffee_controller.dart';
 import 'package:coffee_shop_app/controllers/cart_controller.dart';
+import 'package:coffee_shop_app/controllers/location_controller.dart';
 import 'package:coffee_shop_app/screens/splash/splash_screen.dart';
 import 'package:coffee_shop_app/screens/home/home_screen.dart';
 
@@ -26,6 +27,7 @@ class CoffeeShopApp extends StatelessWidget {
           initialBinding: BindingsBuilder(() {
             Get.put(CoffeeController());
             Get.put(CartController());
+            Get.put(LocationController());
           }),
 
           initialRoute: '/',

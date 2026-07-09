@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coffee_shop_app/core/constants/app_colors.dart';
 import 'package:coffee_shop_app/core/constants/app_strings.dart';
 import 'package:coffee_shop_app/controllers/cart_controller.dart';
+import 'package:coffee_shop_app/controllers/location_controller.dart';
 import 'package:coffee_shop_app/widgets/quantity_selector.dart';
 
 /// Checkout screen — light theme matching reference design
@@ -15,6 +16,7 @@ class CheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartController = Get.find<CartController>();
+    final locationController = Get.find<LocationController>();
 
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
@@ -99,7 +101,7 @@ class CheckoutScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 12.h),
                     Text(
-                      'Jl. Kpg Sutoyo',
+                      'Delivery Location',
                       style: GoogleFonts.sora(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
@@ -108,7 +110,7 @@ class CheckoutScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      'Kpg. Sutoyo No. 620, Bilzen, Tanjungbalai',
+                      locationController.currentLocation.value,
                       style: GoogleFonts.sora(
                         fontSize: 12.sp,
                         color: AppColors.lightTextSecondary,
@@ -141,23 +143,36 @@ class CheckoutScreen extends StatelessWidget {
                   // Coffee image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12.r),
-                    child: CachedNetworkImage(
-                      imageUrl: coffee.imageUrl,
-                      width: 54.w,
-                      height: 54.w,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        width: 54.w,
-                        height: 54.w,
-                        color: AppColors.lightCard,
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        width: 54.w,
-                        height: 54.w,
-                        color: AppColors.lightCard,
-                        child: const Icon(Icons.coffee, color: AppColors.primary),
-                      ),
-                    ),
+                    child: coffee.imageUrl.startsWith('http')
+                      ? CachedNetworkImage(
+                          imageUrl: coffee.imageUrl,
+                          width: 54.w,
+                          height: 54.w,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Container(
+                            width: 54.w,
+                            height: 54.w,
+                            color: AppColors.lightCard,
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                            width: 54.w,
+                            height: 54.w,
+                            color: AppColors.lightCard,
+                            child: const Icon(Icons.coffee, color: AppColors.primary),
+                          ),
+                        )
+                      : Image.asset(
+                          coffee.imageUrl,
+                          width: 54.w,
+                          height: 54.w,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            width: 54.w,
+                            height: 54.w,
+                            color: AppColors.lightCard,
+                            child: const Icon(Icons.coffee, color: AppColors.primary),
+                          ),
+                        ),
                   ),
                   SizedBox(width: 14.w),
 

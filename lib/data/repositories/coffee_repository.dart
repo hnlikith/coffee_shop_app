@@ -24,88 +24,80 @@ class CoffeeRepository {
       'id': '1',
       'name': 'Caffe Mocha',
       'description':
-          'A rich chocolate-flavored warm beverage made with espresso, steamed milk, and cocoa. The perfect balance of coffee and chocolate indulgence.',
+          'A rich chocolate-flavored warm beverage, made with fresh espresso and hot milk. It is the perfect blend of coffee and chocolate.',
       'price': 4.53,
       'rating': 4.8,
-      'image_url':
-          'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
+      'image_url': 'assets/images/caffe_mocha.png',
       'category': 'Latte',
     },
     {
       'id': '2',
       'name': 'Flat White',
       'description':
-          'A smooth and velvety coffee with a thin layer of steamed milk over a double shot of espresso. Silky and full-bodied.',
+          'Smooth and velvety espresso coffee with microfoam. A classic for those who want strong coffee flavor with a creamy texture.',
       'price': 3.99,
       'rating': 4.6,
-      'image_url':
-          'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=400',
+      'image_url': 'assets/images/flat_white.png',
       'category': 'Latte',
     },
     {
       'id': '3',
       'name': 'Espresso',
       'description':
-          'A concentrated shot of bold coffee brewed by forcing hot water through finely ground beans. Pure coffee intensity.',
+          'A concentrated shot of bold coffee. Made by forcing pressurized hot water through finely ground coffee beans.',
       'price': 2.99,
       'rating': 4.9,
-      'image_url':
-          'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=400',
+      'image_url': 'assets/images/espresso.png',
       'category': 'Americano',
     },
     {
       'id': '4',
       'name': 'Cappuccino',
       'description':
-          'A classic Italian coffee with equal parts espresso, steamed milk, and rich milk foam. Perfectly balanced and frothy.',
+          'Classic Italian coffee with double espresso, hot milk, and steamed milk foam on top.',
       'price': 4.20,
       'rating': 4.7,
-      'image_url':
-          'https://images.unsplash.com/photo-1534778101976-62847782c213?w=400',
+      'image_url': 'assets/images/cappuccino.png',
       'category': 'Macchiato',
     },
     {
       'id': '5',
       'name': 'Macchiato',
       'description':
-          'An espresso "stained" with a small dollop of foamed milk for a bold yet balanced flavor. Simple elegance in a cup.',
+          'Espresso coffee drink with a small amount of milk, usually foamed. Bold flavor with a hint of creaminess.',
       'price': 3.50,
-      'rating': 4.5,
-      'image_url':
-          'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400',
+      'rating:': 4.5,
+      'image_url': 'assets/images/macchiato.png',
       'category': 'Macchiato',
     },
     {
       'id': '6',
       'name': 'Americano',
       'description':
-          'A smooth, full-bodied coffee made by diluting espresso with hot water. Bold yet approachable and refreshing.',
+          'Prepared by brewing espresso with added hot water, giving it a similar strength to, but different flavor from, drip coffee.',
       'price': 3.00,
       'rating': 4.4,
-      'image_url':
-          'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=400',
+      'image_url': 'assets/images/americano.png',
       'category': 'Americano',
     },
     {
       'id': '7',
       'name': 'Latte',
       'description':
-          'A creamy coffee made with espresso and a generous pour of steamed milk. Smooth, mild, and absolutely comforting.',
+          'A milk coffee that boasts a silky layer of foam as a real highlight to the drink.',
       'price': 4.00,
       'rating': 4.6,
-      'image_url':
-          'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=400',
+      'image_url': 'assets/images/latte.png',
       'category': 'Latte',
     },
     {
       'id': '8',
       'name': 'Mocha Latte',
       'description':
-          'A decadent blend of espresso, chocolate syrup, and steamed milk topped with whipped cream. The ultimate treat.',
+          'A variant of a caffe latte inspired by the mocha coffee bean. It has a rich chocolate flavor.',
       'price': 5.00,
       'rating': 4.8,
-      'image_url':
-          'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400',
+      'image_url': 'assets/images/mocha_latte.png',
       'category': 'Latte',
     },
   ];

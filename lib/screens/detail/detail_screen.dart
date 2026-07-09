@@ -73,31 +73,47 @@ class DetailScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.r),
                   child: Hero(
                     tag: 'coffee-${coffee.id}',
-                    child: CachedNetworkImage(
-                      imageUrl: coffee.imageUrl,
-                      width: double.infinity,
-                      height: 226.h,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        height: 226.h,
-                        color: AppColors.lightCard,
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.primary,
-                            strokeWidth: 2,
+                    child: coffee.imageUrl.startsWith('http')
+                      ? CachedNetworkImage(
+                          imageUrl: coffee.imageUrl,
+                          width: double.infinity,
+                          height: 226.h,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Container(
+                            height: 226.h,
+                            color: AppColors.lightCard,
+                            child: const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primary,
+                                strokeWidth: 2,
+                              ),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                            height: 226.h,
+                            color: AppColors.lightCard,
+                            child: Icon(
+                              Icons.coffee,
+                              color: AppColors.primary,
+                              size: 60.sp,
+                            ),
+                          ),
+                        )
+                      : Image.asset(
+                          coffee.imageUrl,
+                          width: double.infinity,
+                          height: 226.h,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            height: 226.h,
+                            color: AppColors.lightCard,
+                            child: Icon(
+                              Icons.coffee,
+                              color: AppColors.primary,
+                              size: 60.sp,
+                            ),
                           ),
                         ),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        height: 226.h,
-                        color: AppColors.lightCard,
-                        child: Icon(
-                          Icons.coffee,
-                          color: AppColors.primary,
-                          size: 60.sp,
-                        ),
-                      ),
-                    ),
                   ),
                 ),
               ),

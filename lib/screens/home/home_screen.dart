@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:coffee_shop_app/core/constants/app_colors.dart';
 import 'package:coffee_shop_app/controllers/coffee_controller.dart';
 import 'package:coffee_shop_app/controllers/cart_controller.dart';
+import 'package:coffee_shop_app/controllers/location_controller.dart';
 import 'package:coffee_shop_app/screens/detail/detail_screen.dart';
 import 'package:coffee_shop_app/widgets/coffee_card.dart';
 import 'package:coffee_shop_app/widgets/category_chip.dart';
@@ -20,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final coffeeController = Get.find<CoffeeController>();
     final cartController = Get.find<CartController>();
+    final locationController = Get.find<LocationController>();
 
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
@@ -72,14 +74,14 @@ class HomeScreen extends StatelessWidget {
                                 SizedBox(height: 6.h),
                                 Row(
                                   children: [
-                                    Text(
-                                      'Bilzen, Tanjungbalai',
-                                      style: GoogleFonts.sora(
-                                        fontSize: 14.sp,
-                                        color: AppColors.textPrimary,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
+                                    Obx(() => Text(
+                                          locationController.currentLocation.value,
+                                          style: GoogleFonts.sora(
+                                            fontSize: 14.sp,
+                                            color: AppColors.textPrimary,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        )),
                                     SizedBox(width: 4.w),
                                     Icon(
                                       Icons.keyboard_arrow_down,

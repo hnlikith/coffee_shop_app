@@ -79,28 +79,42 @@ class _CoffeeCardState extends State<CoffeeCard>
                       ),
                       child: Hero(
                         tag: 'coffee-${widget.coffee.id}',
-                        child: CachedNetworkImage(
-                          imageUrl: widget.coffee.imageUrl,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => Container(
-                            color: AppColors.lightCard,
-                            child: const Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.primary,
-                                strokeWidth: 2,
+                        child: widget.coffee.imageUrl.startsWith('http') 
+                          ? CachedNetworkImage(
+                              imageUrl: widget.coffee.imageUrl,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => Container(
+                                color: AppColors.lightCard,
+                                child: const Center(
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.primary,
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                color: AppColors.lightCard,
+                                child: Icon(
+                                  Icons.coffee,
+                                  color: AppColors.primary,
+                                  size: 40.sp,
+                                ),
+                              ),
+                            )
+                          : Image.asset(
+                              widget.coffee.imageUrl,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) => Container(
+                                color: AppColors.lightCard,
+                                child: Icon(
+                                  Icons.coffee,
+                                  color: AppColors.primary,
+                                  size: 40.sp,
+                                ),
                               ),
                             ),
-                          ),
-                          errorWidget: (context, url, error) => Container(
-                            color: AppColors.lightCard,
-                            child: Icon(
-                              Icons.coffee,
-                              color: AppColors.primary,
-                              size: 40.sp,
-                            ),
-                          ),
-                        ),
                       ),
                     ),
                     // Rating badge

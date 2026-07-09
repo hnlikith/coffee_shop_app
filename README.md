@@ -1,133 +1,65 @@
-# ☕ Coffee Shop App
+# Coffee Shop App
 
-A premium Flutter coffee ordering application with a modern dark theme, Supabase backend integration, and smooth animations.
+A premium, highly-responsive Flutter application developed for the Flutter Designer Intern Assignment. Features dynamic UI state management, real-time GPS location tracking, and integration with a Supabase backend.
 
-![Flutter](https://img.shields.io/badge/Flutter-3.x-blue?logo=flutter)
-![Dart](https://img.shields.io/badge/Dart-3.x-blue?logo=dart)
-![Supabase](https://img.shields.io/badge/Backend-Supabase-green?logo=supabase)
-![GetX](https://img.shields.io/badge/State-GetX-purple)
+## Project setup instructions
 
----
+1. Ensure you have the Flutter SDK installed and added to your system PATH.
+2. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/hnlikith/coffee_shop_app.git
+   ```
+3. Navigate into the project directory:
+   ```bash
+   cd coffee_shop_app
+   ```
+4. Check that your emulator is running or a physical device is connected via USB.
 
-## 📱 Features
+## Dependency installation
 
-- **4 Premium Screens**: Splash, Home, Detail, Checkout
-- **Supabase Backend**: PostgreSQL database with real REST APIs
-- **GetX State Management**: Reactive UI updates throughout
-- **Responsive Design**: Adapts to all Android and iOS screen sizes
-- **Smooth Animations**: Hero transitions, fade-ins, scale effects
-- **Category Filtering**: Filter products by coffee type
-- **Search**: Real-time product search
-- **Size Selector**: S/M/L with dynamic price calculation
-- **Quantity Controls**: Increment/decrement with live total updates
-- **Delivery/Pickup Toggle**: Dynamic checkout experience
-
----
-
-## 🛠 Tech Stack
-
-| Layer              | Technology             |
-|--------------------|------------------------|
-| Framework          | Flutter                |
-| Language           | Dart                   |
-| State Management   | GetX                   |
-| Backend            | Supabase (PostgreSQL)  |
-| Image Caching      | CachedNetworkImage     |
-| Responsive Design  | flutter_screenutil     |
-| Typography         | Google Fonts (Sora)    |
-| Architecture       | Clean Architecture     |
-
----
-
-## 📂 Folder Structure
-
-```
-lib/
-├── main.dart                    # App entry point
-├── app.dart                     # Root widget with routing
-├── core/
-│   ├── constants/
-│   │   ├── app_colors.dart      # Color palette
-│   │   ├── app_strings.dart     # String constants
-│   │   └── supabase_constants.dart  # Supabase config
-│   └── theme/
-│       └── app_theme.dart       # Dark theme configuration
-├── data/
-│   ├── models/
-│   │   ├── coffee_model.dart    # Coffee product model
-│   │   ├── category_model.dart  # Category model
-│   │   └── cart_item_model.dart # Cart item model
-│   ├── repositories/
-│   │   └── coffee_repository.dart   # Data access layer
-│   └── services/
-│       └── supabase_service.dart    # Supabase client wrapper
-├── controllers/
-│   ├── coffee_controller.dart   # Products and categories state
-│   └── cart_controller.dart     # Cart, size, quantity state
-├── screens/
-│   ├── splash/
-│   │   └── splash_screen.dart   # Animated splash screen
-│   ├── home/
-│   │   └── home_screen.dart     # Home with grid and categories
-│   ├── detail/
-│   │   └── detail_screen.dart   # Product detail with size selector
-│   └── checkout/
-│       └── checkout_screen.dart # Order and payment screen
-└── widgets/
-    ├── coffee_card.dart         # Product grid card
-    ├── category_chip.dart       # Category filter chip
-    ├── size_selector.dart       # S/M/L toggle
-    ├── quantity_selector.dart   # +/- quantity stepper
-    └── promo_banner.dart        # Promotional banner
-```
-
----
-
-## 🚀 Installation
-
-### Prerequisites
-
-- Flutter SDK 3.x+
-- Android Studio / VS Code
-- Git
-
-### Steps
+This project uses standard Flutter packages. To install all necessary dependencies, run the following command in the root directory of the project:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/coffee-ordering-app.git
-cd coffee-ordering-app
-
-# 2. Install dependencies
 flutter pub get
-
-# 3. Run the app
-flutter run
 ```
 
----
+Key dependencies included:
+- `get` (State Management, Routing, DI)
+- `geolocator` & `http` (Live GPS & Reverse Geocoding)
+- `supabase_flutter` (Backend connectivity)
+- `flutter_screenutil` (Responsive UI layout)
+- `google_fonts` (Typography)
 
-## 🔧 API / Backend Setup (Supabase)
+## Steps to run the application locally
 
-### 1. Create a Supabase Project
+1. Start your Android Emulator or connect a physical Android/iOS device.
+2. Run the application from the root directory using:
+   ```bash
+   flutter run
+   ```
+3. **Location Services:** Upon opening, the app will request location permissions to fetch your live city using OpenStreetMap. Ensure Location/GPS is turned on in your device emulator.
 
-Go to [supabase.com](https://supabase.com) and create a new project named `coffee_shop_app`.
+*Note: For the best performance and to ensure all assets are bundled correctly, building an APK is recommended (`flutter build apk --release`).*
 
-### 2. Create Tables
+## Backend configuration/setup
 
-Run the following SQL in the Supabase SQL Editor:
+The application is fully integrated with **Supabase** for backend data management. 
+
+1. Create a project at [supabase.com](https://supabase.com/).
+2. Navigate to the SQL Editor in your Supabase dashboard and execute the following database schema to create the necessary tables:
 
 ```sql
--- Categories
+-- Create Categories Table
 CREATE TABLE categories (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL
 );
 
+-- Insert Categories
 INSERT INTO categories (name) VALUES
-  ('All Coffee'), ('Macchiato'), ('Latte'), ('Americano');
+  ('All Coffee'), ('Machaito'), ('Latte'), ('Americano');
 
--- Products
+-- Create Products Table
 CREATE TABLE products (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
@@ -138,72 +70,32 @@ CREATE TABLE products (
   category TEXT NOT NULL
 );
 
+-- Insert Products
 INSERT INTO products (name, description, price, rating, image_url, category) VALUES
-  ('Caffe Mocha', 'A rich chocolate-flavored warm beverage', 4.53, 4.8, 'YOUR_URL', 'Latte'),
-  ('Flat White', 'Smooth and velvety espresso coffee', 3.99, 4.6, 'YOUR_URL', 'Latte'),
-  ('Espresso', 'A concentrated shot of bold coffee', 2.99, 4.9, 'YOUR_URL', 'Americano'),
-  ('Cappuccino', 'Classic Italian coffee with foam', 4.20, 4.7, 'YOUR_URL', 'Macchiato'),
-  ('Macchiato', 'Espresso stained with foamed milk', 3.50, 4.5, 'YOUR_URL', 'Macchiato'),
-  ('Americano', 'Smooth espresso diluted with hot water', 3.00, 4.4, 'YOUR_URL', 'Americano'),
-  ('Latte', 'Creamy espresso with steamed milk', 4.00, 4.6, 'YOUR_URL', 'Latte'),
-  ('Mocha Latte', 'Espresso with chocolate and steamed milk', 5.00, 4.8, 'YOUR_URL', 'Latte');
+  ('Caffe Mocha', 'A rich chocolate-flavored warm beverage made with espresso, steamed milk, and cocoa.', 4.53, 4.8, 'assets/images/caffe_mocha.png', 'Latte'),
+  ('Flat White', 'A smooth and velvety coffee with a thin layer of steamed milk over a double shot of espresso.', 3.99, 4.6, 'assets/images/flat_white.png', 'Latte'),
+  ('Espresso', 'A concentrated shot of bold coffee brewed by forcing hot water through finely ground beans.', 2.99, 4.9, 'assets/images/espresso.png', 'Americano'),
+  ('Cappuccino', 'A classic Italian coffee with equal parts espresso, steamed milk, and rich milk foam.', 4.20, 4.7, 'assets/images/cappuccino.png', 'Machaito'),
+  ('Macchiato', 'An espresso "stained" with a small dollop of foamed milk for a bold yet balanced flavor.', 3.50, 4.5, 'assets/images/macchiato.png', 'Machaito'),
+  ('Americano', 'A smooth, full-bodied coffee made by diluting espresso with hot water.', 3.00, 4.4, 'assets/images/americano.png', 'Americano'),
+  ('Latte', 'A creamy coffee made with espresso and a generous pour of steamed milk.', 4.00, 4.6, 'assets/images/latte.png', 'Latte'),
+  ('Mocha Latte', 'A decadent blend of espresso, chocolate syrup, and steamed milk topped with whipped cream.', 5.00, 4.8, 'assets/images/mocha_latte.png', 'Latte');
 ```
 
-### 3. Upload Coffee Images
+## API endpoints or configuration details
 
-1. Create a **Storage bucket** named `coffee-images`
-2. Upload coffee images
-3. Copy the public URLs into the `image_url` column
+If your Supabase database is empty or offline, the app employs a **graceful fallback architecture** that serves the above data locally. 
 
-### 4. Configure Flutter App
-
-Update `lib/core/constants/supabase_constants.dart`:
+To connect the live backend, open `lib/main.dart` and insert your Supabase credentials into the `Supabase.initialize` block:
 
 ```dart
-static const String supabaseUrl = 'https://YOUR_PROJECT.supabase.co';
-static const String supabaseAnonKey = 'YOUR_ANON_KEY';
+await Supabase.initialize(
+  url: 'YOUR_SUPABASE_URL',
+  anonKey: 'YOUR_SUPABASE_ANON_KEY',
+);
 ```
 
-> **Note**: The app includes built-in fallback data with Unsplash images, so it works even without Supabase configured.
-
----
-
-## 📦 Build APK
-
-```bash
-flutter clean
-flutter pub get
-flutter build apk --release
-```
-
-APK output: `build/app/outputs/flutter-apk/app-release.apk`
-
----
-
-## 📸 App Flow
-
-```
-Splash Screen → Home Screen → Coffee Detail → Checkout
-```
-
-1. **Splash**: Animated entry with Get Started button
-2. **Home**: Browse products, filter by category, search
-3. **Detail**: View product, select size (S/M/L), see dynamic pricing
-4. **Checkout**: Choose delivery/pickup, adjust quantity, view total, place order
-
----
-
-## 🏗 Architecture
-
-The app follows **Clean Architecture** principles:
-
-- **Data Layer**: Models, Repository, Services (Supabase)
-- **Business Logic**: GetX Controllers with reactive state
-- **Presentation**: Screens and reusable Widgets
-- **Core**: Constants, Theme, Utilities
-
----
-
-## 📄 License
-
-This project is created as part of a Flutter Internship Assignment.
+**External API (OpenStreetMap Nominatim):**
+- **Endpoint:** `https://nominatim.openstreetmap.org/reverse`
+- **Method:** `GET`
+- **Purpose:** Converts the user's raw GPS latitude and longitude into a localized City and State name. No authentication is required, but a `User-Agent` header is provided as per Nominatim policy.
