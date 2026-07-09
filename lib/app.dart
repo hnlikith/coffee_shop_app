@@ -16,31 +16,27 @@ class CoffeeShopApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812), // iPhone X design size
       minTextAdapt: true,
-      splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
           title: 'Coffee Shop',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
-
+          
           // Register GetX controllers globally
           initialBinding: BindingsBuilder(() {
             Get.put(CoffeeController());
             Get.put(CartController());
           }),
 
-          // Routes
           initialRoute: '/',
           getPages: [
             GetPage(
               name: '/',
               page: () => const SplashScreen(),
-              transition: Transition.fadeIn,
             ),
             GetPage(
               name: '/home',
               page: () => const HomeScreen(),
-              transition: Transition.fadeIn,
             ),
           ],
         );

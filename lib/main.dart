@@ -22,12 +22,10 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  // Initialize Supabase (silently — uses fallback data if not configured)
-  try {
-    await SupabaseService.initialize();
-  } catch (e) {
+  // Initialize Supabase in the background (do NOT await it, so it doesn't block runApp if emulator network hangs)
+  SupabaseService.initialize().catchError((e) {
     debugPrint('Supabase not configured, using fallback data: $e');
-  }
+  });
 
   runApp(const CoffeeShopApp());
 }
